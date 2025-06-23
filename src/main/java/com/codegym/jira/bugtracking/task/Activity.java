@@ -28,6 +28,8 @@ public class Activity extends BaseEntity implements HasAuthorId {
     protected String title;
     @NotNull
     @Column(name = "task_id")
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "task_id", nullable = false)
     private Long taskId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", insertable = false, updatable = false)

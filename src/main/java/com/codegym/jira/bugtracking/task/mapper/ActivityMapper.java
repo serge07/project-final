@@ -1,5 +1,6 @@
 package com.codegym.jira.bugtracking.task.mapper;
 
+import com.codegym.jira.bugtracking.task.Task;
 import com.codegym.jira.common.BaseMapper;
 import com.codegym.jira.common.error.DataConflictException;
 import com.codegym.jira.bugtracking.task.Activity;

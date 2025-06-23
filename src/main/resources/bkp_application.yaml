@@ -16,7 +16,7 @@ spring:
 
     # validate db by model
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
 
     properties:
       #  http://docs.jboss.org/hibernate/orm/5.3/userguide/html_single/Hibernate_User_Guide.html#configurations
@@ -25,6 +25,7 @@ spring:
         default_batch_fetch_size: 20
         # https://stackoverflow.com/questions/21257819/what-is-the-difference-between-hibernate-jdbc-fetch-size-and-hibernate-jdbc-batc
         jdbc.batch_size: 20
+
 
   # Jackson Fields Serialization
   jackson:
@@ -114,62 +115,6 @@ server:
       force: true
 springdoc.swagger-ui.path: /doc
 
-# =============================================
-# PRODUCTION PROFILE CONFIGURATION (spring.profiles.active=prod)
-# =============================================
----
-spring:
-  config:
-    activate:
-      on-profile: prod
-  datasource:
-    url: jdbc:postgresql://localhost:5432/jira
-    username: jira
-    password: CodeGymJira
-  jpa:
-    hibernate:
-      ddl-auto: validate  # Validate schema, don't create
-    show-sql: true
-    properties:
-      hibernate:
-        jdbc:
-          lob:
-            non_contextual_creation: true
-        temp:
-          use_jdbc_metadata_defaults: false
-  sql:
-    init:
-      mode: never  # Disable in production
-  liquibase:
-    change-log: classpath:db/changelog.sql
-    enabled: true
-    default-schema: public
-    user: jira
-    password: CodeGymJira
-    url: jdbc:postgresql://localhost:5432/jira
-    drop-first: false
-    contexts: prod
 
-# =============================================
-# TEST PROFILE CONFIGURATION (spring.profiles.active=test)
-# =============================================
----
-spring:
-  config:
-    activate:
-      on-profile: test
-  datasource:
-    url: jdbc:postgresql://localhost:5433/jira-test
-    username: jira
-    password: CodeGymJira
-  jpa:
-    hibernate:
-      ddl-auto: create-drop  # Clean database for each test session
-  liquibase:
-    enabled: false  # Typically disable for tests
-  sql:
-    init:
-      mode: always  # Allows test data initialization
-  mail:
-    host: localhost  # Use mock mail server for tests
-    port: 1025
+
+
